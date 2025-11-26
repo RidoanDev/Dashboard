@@ -2,22 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-      <link rel="icon" type="image/png" href="https://hornepage.netlify.app/public/homepage.jpg" />
+    <link rel="icon" type="image/png" href="https://hornepage.netlify.app/public/homepage.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homapage</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
-        /* Light Green Premium Google Pixel Material Theme Variables */
         :root {
-            --color-bg-primary: #f5f5f5; /* Off-White/Light Gray background */
-            --color-bg-surface: #ffffff; /* White Cards/Search Bar */
-            --color-text-dark: #212121; /* Primary Dark Text */
-            --color-text-medium: #616161; /* Secondary Text (Deep Gray) */
-            --color-accent: #4CAF50; /* Aesthetic Green (Pixel Primary) */
-            --color-accent-light: #E8F5E9; /* Very Light Green for hover */
-            --color-shadow-base: rgba(0, 0, 0, 0.1); /* Soft, subtle shadow */
+            --color-bg-primary: #f5f5f5;
+            --color-bg-surface: #ffffff;
+            --color-text-dark: #212121;
+            --color-text-medium: #616161;
+            --color-accent: #4CAF50;
+            --color-accent-light: #E8F5E9;
+            --color-shadow-base: rgba(0, 0, 0, 0.1);
             --border-radius-pill: 28px;
             --border-radius-medium: 14px;
         }
@@ -41,7 +40,6 @@
             text-align: center;
         }
 
-        /* --- Search Bar Styling --- */
         .search-container {
             margin-bottom: 70px;
         }
@@ -66,7 +64,7 @@
 
         #search-form:focus-within {
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-            border-color: var(--color-accent); /* Green focus border */
+            border-color: var(--color-accent);
         }
         
         #engine-selector-btn {
@@ -119,11 +117,10 @@
         }
         
         #search-form button[type="submit"]:hover {
-            background-color: #388E3C; /* Darker green */
+            background-color: #388E3C;
             transform: scale(1.05);
         }
 
-        /* Dynamic Dropdown Content */
         #engine-dropdown {
             position: absolute;
             top: calc(100% + 10px);
@@ -149,7 +146,6 @@
             visibility: visible;
         }
 
-        /* Dropdown section headers */
         .dropdown-header {
             padding: 10px 15px 5px 15px;
             font-size: 13px;
@@ -179,7 +175,7 @@
         }
 
         .dropdown-item:hover {
-            background-color: var(--color-accent-light); /* Light Green Hover */
+            background-color: var(--color-accent-light);
             color: var(--color-text-dark);
         }
         
@@ -189,12 +185,10 @@
             text-align: center;
         }
 
-
-        /* --- Links Grid Styling --- */
         .links-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* Desktop: 4 columns */
-            gap: 30px 40px;  
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px 40px;
             max-width: 960px;
             margin: 0 auto;
         }
@@ -205,65 +199,73 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             padding: 15px 5px;
             border-radius: var(--border-radius-medium);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .link-item:hover::before {
+            left: 100%;
         }
 
         .link-item:hover {
-            transform: translateY(-5px); /* Lift animation */
-            background-color: var(--color-accent-light);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* Circular Icon Wrapper */
-        .icon-circle {
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            background-color: #f0f0f0;  
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 12px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);  
-            transition: all 0.3s;
-        }
-
-        /* Consistent icon colors using accent green */
-        .link-item i {
-            font-size: 28px;
+            transform: translateY(-8px) scale(1.05);
             color: var(--color-accent);
         }
-        
-        /* Text styling */
+
+        .link-item i {
+            font-size: 42px;
+            color: var(--color-accent);
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        .link-item:hover i {
+            transform: scale(1.2) rotate(5deg);
+            color: #388E3C;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+        }
+
         .link-item span {
             font-size: 15px;
-            font-weight: 500;
+            font-weight: 600;
             text-align: center;
             line-height: 1.2;
             color: var(--color-text-dark);
+            transition: color 0.3s ease;
         }
 
-        /* --- MEDIA QUERIES FOR RESPONSIVENESS (3 columns on smaller screens) --- */
+        .link-item:hover span {
+            color: var(--color-accent);
+        }
 
         @media (max-width: 900px) {
             .links-grid {
-                grid-template-columns: repeat(3, 1fr); /* 3 columns for tablet/mobile */
+                grid-template-columns: repeat(3, 1fr);
                 gap: 25px 20px;
                 max-width: 600px;
             }
-            .icon-circle {
-                width: 60px;
-                height: 60px;
-            }
             .link-item i {
-                font-size: 26px;
+                font-size: 38px;
             }
         }
 
         @media (max-width: 600px) {
-             #search-form button[type="submit"] {
+            #search-form button[type="submit"] {
                 width: 45px;
                 height: 45px;
                 font-size: 18px;
@@ -271,6 +273,9 @@
             }
             .link-item span {
                 font-size: 13px;
+            }
+            .link-item i {
+                font-size: 34px;
             }
         }
         
@@ -298,89 +303,84 @@
         </div>
 
         <div class="links-grid">
-            <!-- AI & Chat Platforms -->
             <a href="https://chatgpt.com" target="_blank" class="link-item" title="ChatGPT">
-                <div class="icon-circle"><i class="fas fa-comment-dots"></i></div>
+                <i class="fas fa-comment-dots"></i>
                 <span>ChatGPT</span>
             </a>
             <a href="https://chat.deepseek.com" target="_blank" class="link-item" title="Deep Seek">
-                <div class="icon-circle"><i class="fas fa-robot"></i></div>
+                <i class="fas fa-robot"></i>
                 <span>Deep Seek</span>
             </a>
             <a href="https://gemini.google.com" target="_blank" class="link-item" title="Gemini">
-                <div class="icon-circle"><i class="fas fa-gem"></i></div>
+                <i class="fas fa-gem"></i>
                 <span>Gemini</span>
             </a>
             <a href="https://aistudio.google.com" target="_blank" class="link-item" title="Google AI Studio">
-                <div class="icon-circle"><i class="fas fa-brain"></i></div>
+                <i class="fas fa-brain"></i>
                 <span>Google AI Studio</span>
             </a>
             
-            <!-- Google Workspace -->
             <a href="https://mail.google.com" target="_blank" class="link-item" title="Gmail">
-                <div class="icon-circle"><i class="fas fa-envelope"></i></div>
+                <i class="fas fa-envelope"></i>
                 <span>Gmail</span>
             </a>
             <a href="https://keep.google.com" target="_blank" class="link-item" title="Google Keep">
-                <div class="icon-circle"><i class="fas fa-sticky-note"></i></div>
+                <i class="fas fa-sticky-note"></i>
                 <span>Google Keep</span>
             </a>
             <a href="https://drive.google.com" target="_blank" class="link-item" title="Google Drive">
-                <div class="icon-circle"><i class="fas fa-hdd"></i></div>
+                <i class="fas fa-hdd"></i>
                 <span>Google Drive</span>
             </a>
             <a href="https://forms.google.com" target="_blank" class="link-item" title="Google Forms">
-                <div class="icon-circle"><i class="fas fa-list-alt"></i></div>
+                <i class="fas fa-list-alt"></i>
                 <span>Google Forms</span>
             </a>
             <a href="https://sheets.google.com" target="_blank" class="link-item" title="Google Sheets">
-                <div class="icon-circle"><i class="fas fa-table"></i></div>
+                <i class="fas fa-table"></i>
                 <span>Google Sheets</span>
             </a>
             
-            <!-- Development Platforms -->
             <a href="https://app.netlify.com/teams/ridoandev/projects" target="_blank" class="link-item" title="Netlify">
-                <div class="icon-circle"><i class="fas fa-cloud"></i></div>
+                <i class="fas fa-cloud"></i>
                 <span>Netlify</span>
             </a>
             <a href="https://vercel.com/login" target="_blank" class="link-item" title="Vercel">
-                <div class="icon-circle"><i class="fas fa-code-branch"></i></div>
+                <i class="fas fa-code-branch"></i>
                 <span>Vercel</span>
             </a>
             
-            <!-- Social Media -->
             <a href="https://youtube.com/@ridoan-zisan" target="_blank" class="link-item" title="YouTube">
-                <div class="icon-circle"><i class="fab fa-youtube"></i></div>
+                <i class="fab fa-youtube"></i>
                 <span>YouTube</span>
             </a>
             <a href="https://linkedin.com/in/ridoan-zisan" target="_blank" class="link-item" title="LinkedIn">
-                <div class="icon-circle"><i class="fab fa-linkedin-in"></i></div>
+                <i class="fab fa-linkedin-in"></i>
                 <span>LinkedIn</span>
             </a>
             <a href="https://github.com/RidoanDev" target="_blank" class="link-item" title="GitHub">
-                <div class="icon-circle"><i class="fab fa-github"></i></div>
+                <i class="fab fa-github"></i>
                 <span>GitHub</span>
             </a>
             <a href="https://facebook.com/ridoan.zisan" target="_blank" class="link-item" title="Facebook">
-                <div class="icon-circle"><i class="fab fa-facebook-f"></i></div>
+                <i class="fab fa-facebook-f"></i>
                 <span>Facebook</span>
             </a>
             <a href="https://wa.me/8801712525910" target="_blank" class="link-item" title="WhatsApp">
-                <div class="icon-circle"><i class="fab fa-whatsapp"></i></div>
+                <i class="fab fa-whatsapp"></i>
                 <span>WhatsApp</span>
             </a>
             <a href="https://x.com/ridoan_zisan" target="_blank" class="link-item" title="Twitter (X)">
-                <div class="icon-circle"><i class="fab fa-x-twitter"></i></div>
+                <i class="fab fa-x-twitter"></i>
                 <span>X</span>
             </a>
             <a href="https://instagram.com/ridoan.zisan" target="_blank" class="link-item" title="Instagram">
-                <div class="icon-circle"><i class="fab fa-instagram"></i></div>
+                <i class="fab fa-instagram"></i>
                 <span>Instagram</span>
             </a>
             
-            <!-- Portfolio -->
             <a href="https://ridoan-zisan.netlify.app" target="_blank" class="link-item" title="Portfolio">
-                <div class="icon-circle"><i class="fas fa-code"></i></div>
+                <i class="fas fa-code"></i>
                 <span>Portfolio</span>
             </a>
         </div>
@@ -388,7 +388,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Updated Data for all search engines based on user request
             const engineGroups = [
                 {
                     header: 'Search Engines',
@@ -398,7 +397,7 @@
                         { name: 'Yahoo', icon: 'fab fa-yahoo', action: 'https://search.yahoo.com/search', param: 'p', color: '#410093' },
                         { name: 'DuckDuckGo', icon: 'fas fa-search', action: 'https://duckduckgo.com/', param: 'q', color: '#DE5833' },
                         { name: 'Brave', icon: 'fas fa-shield-alt', action: 'https://search.brave.com/search', param: 'q', color: '#fb542b' },
-                        { name: 'Tor', icon: 'fas fa-shield-alt', action: 'https://duckduckgo.com/', param: 'q', color: '#5C2D91' }, // Using DDG for a generic Tor search entry
+                        { name: 'Tor', icon: 'fas fa-shield-alt', action: 'https://duckduckgo.com/', param: 'q', color: '#5C2D91' },
                     ]
                 },
                 {
@@ -406,7 +405,7 @@
                     engines: [
                         { name: 'YouTube', icon: 'fab fa-youtube', action: 'https://www.youtube.com/results', param: 'search_query', color: '#FF0000' },
                         { name: 'YouTube Music', icon: 'fas fa-music', action: 'https://music.youtube.com/search?q=', param: 'q', color: '#FF0000' },
-                        { name: 'Spotify', icon: 'fab fa-spotify', action: 'https://www.google.com/search', param: 'q', color: '#1DB954' }, // Spotify search (using Google fallback)
+                        { name: 'Spotify', icon: 'fab fa-spotify', action: 'https://www.google.com/search', param: 'q', color: '#1DB954' },
                         { name: 'Netflix', icon: 'fas fa-video', action: 'https://www.netflix.com/search?q=', param: 'q', color: '#E50914' },
                         { name: 'Instagram', icon: 'fab fa-instagram', action: 'https://www.instagram.com/explore/tags/', param: 'q', color: '#E1306C' },
                         { name: 'Facebook', icon: 'fab fa-facebook', action: 'https://www.facebook.com/search/top/', param: 'q', color: '#1877F2' },
@@ -433,52 +432,42 @@
             const dropdownContent = document.getElementById('engine-dropdown');
             const currentEngineIcon = document.getElementById('current-engine-icon');
 
-            // Find the initial default engine (Google)
             let currentEngine = engineGroups[0].engines.find(e => e.name === 'Google');
 
-            // Function to update form settings
             const updateSearchSettings = (engine) => {
                 currentEngine = engine;
                 
-                // Reset to default search behavior first
                 formElement.action = currentEngine.action;
                 inputElement.name = currentEngine.param;
                 
-                // Update UI elements
                 currentEngineIcon.className = currentEngine.icon;
                 currentEngineIcon.style.color = currentEngine.color || '#4CAF50'; 
                 inputElement.placeholder = `Search with: ${currentEngine.name}`;
                 
-                // Special handling for platforms without direct search parameter, force Google search/site search
                 if (['Netlify', 'Vercel'].includes(currentEngine.name)) {
                     inputElement.name = 'q';
                     formElement.action = 'https://www.google.com/search';
                     inputElement.value = `site:${currentEngine.action.replace('https://', '').replace('http://', '')} ${inputElement.value}`.trim();
                 } else if (['WhatsApp', 'Snapchat', 'Spotify'].includes(currentEngine.name)) {
-                    // Force using Google for non-search social/media apps, prepend platform name
                     inputElement.name = 'q';
                     formElement.action = 'https://www.google.com/search';
                     inputElement.value = `${currentEngine.name} ${inputElement.value}`.trim();
                 } else if (currentEngine.name === 'Tor') {
-                    // Tor search defaults to DuckDuckGo, maintaining the visual and form setting
                     formElement.action = 'https://duckduckgo.com/';
                     inputElement.name = 'q';
                 }
 
-                dropdownContent.classList.remove('visible'); // Hide menu after selection
-                inputElement.focus(); // Focus back on input
+                dropdownContent.classList.remove('visible');
+                inputElement.focus();
             };
 
-            // Build the dropdown menu items
-            dropdownContent.innerHTML = ''; // Clear existing content
+            dropdownContent.innerHTML = '';
             engineGroups.forEach(group => {
-                // Add category header
                 const header = document.createElement('div');
                 header.className = 'dropdown-header';
                 header.textContent = group.header;
                 dropdownContent.appendChild(header);
 
-                // Add engines in the category
                 group.engines.forEach(engine => {
                     const item = document.createElement('div');
                     item.className = 'dropdown-item';
@@ -488,20 +477,17 @@
                 });
             });
 
-            // Toggle dropdown visibility
             dropdownButton.addEventListener('click', (e) => {
                 e.stopPropagation();
                 dropdownContent.classList.toggle('visible');
             });
 
-            // Hide menu when clicking outside
             document.addEventListener('click', (e) => {
                 if (!dropdownContent.contains(e.target) && e.target !== dropdownButton) {
                     dropdownContent.classList.remove('visible');
                 }
             });
 
-            // Initial setup
             updateSearchSettings(currentEngine);
         });
     </script>
